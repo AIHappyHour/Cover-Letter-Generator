@@ -49,85 +49,200 @@
     <option value="designer">Designer</option>
     <option value="creative_director">Creative Director</option>
     <option value="account_manager">Account Manager</option>
+    <option value="social_media">Social Media Manager</option>
+    <option value="art_director">Art Director</option>
+    <option value="media_planner">Media Planner</option>
+    <option value="hr">HR</option>
+    <option value="finance">Finance</option>
   </select>
   <br>
-  <button onclick="generate()">Generate My Cover Letter</button>
-
+  <button onclick="generate()">🔁 Regenerate Cover Letter</button>
   <div id="output">🌀 Your ad-world manifesto will appear here</div>
 
   <script>
     function generate() {
-      const name = document.getElementById('name').value || 'An Overcaffeinated Applicant';
-      const company = document.getElementById('company').value || 'Your Glorious Agency';
-      const role = document.getElementById('role').value;
+      function generate() {
+  const name = document.getElementById('name').value || 'An Overcaffeinated Applicant';
+  const company = document.getElementById('company').value || 'Your Glorious Agency';
+  const role = document.getElementById('role').value;
+
+  const letterArray = templates[role];
+
+  if (!letterArray) {
+    document.getElementById('output').innerText = 'Oops, no fanfiction found for this role yet.';
+    return;
+  }
+
+  const randomIndex = Math.floor(Math.random() * letterArray.length);
+  const rawTemplate = letterArray[randomIndex];
+
+  const letter = rawTemplate
+    .replace(/\${name}/g, name)
+    .replace(/\${company}/g, company);
+
+  document.getElementById('output').innerText = letter;
+}
+
 
       const templates = {
-        copywriter: `
-Dear ${company},
+  copywriter: [
+    `Dear ${company},
 
 Words. They’re not just my tools — they’re my battleground.
 
 Whether it’s a three-word headline or a manifesto that makes planners cry, I bring emotion, edge, and just the right amount of alliteration.
 
-I’ve written ads that made people laugh, cry, and occasionally buy things. I believe in big ideas, bigger ambition, and snackable content that slaps.
-
 Hire me, and let’s turn your brand story into an epic worth binge-reading.
 
-Yours in Oxford commas,
-${name}
-        `,
-        strategist: `
-To the fine minds at ${company},
+Yours in Oxford commas,  
+${name}`
+  ],
+
+  strategist: [
+    `To the fine minds at ${company},
 
 Ever since I first uttered the words “consumer insight,” I knew I was born for this.
-
-I don't just think outside the box — I audit the box, segment its audience, and deliver a deck that turns boxes into business objectives.
 
 If you're looking for someone who can connect cultural trends to campaign KPIs faster than a Gen Z on TikTok, I'm your person.
 
 Let's architect the strategy that Cannes case studies are made of.
 
-Always aligning,
-${name}
-        `,
-        designer: `
-Hey ${company},
+Always aligning,  
+${name}`
+  ],
+
+  designer: [
+    `Hey ${company},
 
 Design isn't decoration. It’s storytelling with pixels, gridlines, and just enough white space to breathe.
 
 From brutalist banners to brand guidelines tighter than kerning on a Helvetica R, I build with feeling and finesse.
 
-If your brand needs a visual renaissance, I’m ready to make the magic.
+Aesthetic allegiance,  
+${name}`
+  ],
 
-Aesthetic allegiance,
-${name}
-        `,
-        creative_director: `
-Dear ${company},
+  creative_director: [
+    `Dear ${company},
 
 I don't direct creatives. I conduct symphonies of chaos into campaigns that convert.
 
-I’ve led brainstorms that turned Post-Its into pitch wins, and mentored teams like a Buddhist monk with a Behance portfolio.
-
 Give me your briefs, your budgets, your jaded clients yearning to believe again — and I’ll give you the best work of their fiscal year.
 
-In relentless pursuit of big ideas,
-${name}
-        `,
-        account_manager: `
-Dear ${company},
+In relentless pursuit of big ideas,  
+${name}`,
+
+    `To the team at ${company},
+
+I've turned brainstorms into battles, post-its into poetry, and edits into Emmy bait.
+
+If your agency wants iconic, not just effective — I’m ready to make award season cry.
+
+Humbly legendary,  
+${name}`,
+
+    `Dear ${company},
+
+Every campaign starts with a whisper. I turn that whisper into a roar.
+
+From Cannes to client decks, I speak fluent chaos and vision. Let me help your agency forget what safe ever looked like.
+
+Signed with ambition,  
+${name}`,
+
+    `Hello ${company},
+
+Vision. Volume. Vibes. That’s what I bring to a pitch, a room, and a Slack thread.
+
+I’ve led global teams with three hours of sleep and one killer idea. Let’s create the kind of work the industry worships and interns quote in pitch decks.
+
+Loudly leading,  
+${name}`,
+
+    `Dear ${company},
+
+You don’t just need a creative director. You need a dream disruptor with pitch decks that make clients weep (with joy).
+
+Let’s take your agency’s name from memorable… to mythological.
+
+Respectfully iconic,  
+${name}`
+  ],
+
+  account_manager: [
+    `Dear ${company},
 
 Client whisperer. Chaos translator. Deadline juggler. That’s my LinkedIn bio. But what I really am? A bridge between ambition and execution.
 
-I’ve turned vague client feedback into actionable gold. I’ve herded creative cats across four time zones. I’ve smiled through 7am status calls.
+I’ve turned vague client feedback into actionable gold. I’ve herded creative cats across four time zones.
 
-Let me be the glue that holds your dream team (and your timelines) together.
+Forever following up,  
+${name}`
+  ],
 
-Forever following up,
-${name}
-        `
-      };
+  social_media: [
+    `Dear ${company},
 
+I live in the comments section. I breathe in memes, exhale engagement.
+
+From reactive TikToks to carefully timed thirst traps, I craft content that not only converts — it *goes viral*.
+
+Hire me and your brand won’t just be present online — it’ll be the main character.
+
+#HireMeMaybe  
+${name}`
+  ],
+
+  art_director: [
+    `Dear ${company},
+
+I don’t just make things look good — I make them iconic.
+
+I've moodboarded my way out of disasters, color-corrected broken dreams, and led teams through the great Helvetica Wars of 2022.
+
+Let’s build the next visual legacy.
+
+With style (and substance),  
+${name}`
+  ],
+
+  media_planner: [
+    `Hello ${company},
+
+While others see CPMs and GRPs, I see poetry in placement.
+
+I’ve outbid giants, outsmarted algorithms, and delivered ROI with the grace of a budget-savvy ballerina.
+
+Optimistically yours,  
+${name}`
+  ],
+
+  hr: [
+    `Dear ${company},
+
+HR isn’t about policies. It’s about people — and I’m in the business of building cults (the healthy kind).
+
+From onboarding to offboarding, I make sure employees feel seen, heard, and slightly too comfortable.
+
+Let’s build a workplace they’ll cry about on LinkedIn — in a good way.
+
+Warmly,  
+${name}`
+  ],
+
+  finance: [
+    `Dear ${company},
+
+Spreadsheets are my love language.
+
+I’ve balanced budgets tighter than your jeans after year-end bonuses. I bring logic, structure, and just enough sass to make accounting a core brand function.
+
+Let me bring balance to your books — and your soul.
+
+Sincerely,  
+${name}`
+  ]
+};
       document.getElementById('output').innerText = templates[role];
     }
   </script>
