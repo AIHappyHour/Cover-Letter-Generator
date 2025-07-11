@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Ad Job Fanfiction Generator</title>
+  <style>
+    body {
+      background-color: #111;
+      color: #fff;
+      font-family: 'Helvetica Neue', sans-serif;
+      padding: 40px;
+      text-align: center;
+    }
+    input, select {
+      padding: 10px;
+      margin: 10px;
+      font-size: 16px;
+      border-radius: 5px;
+      border: none;
+    }
+    button {
+      padding: 12px 25px;
+      background-color: #e63946;
+      color: white;
+      font-size: 18px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    #output {
+      margin-top: 30px;
+      font-size: 1.1em;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+      white-space: pre-wrap;
+      text-align: left;
+    }
+  </style>
+</head>
+<body>
+  <h1>Ad Industry Cover Letter Generator</h1>
+  <p>Choose your role. Enter your info. Let the cringe begin.</p>
+
+  <input type="text" id="name" placeholder="Your Name">
+  <input type="text" id="company" placeholder="Company + Job Title">
+  <select id="role">
+    <option value="copywriter">Copywriter</option>
+    <option value="strategist">Strategist</option>
+    <option value="designer">Designer</option>
+    <option value="creative_director">Creative Director</option>
+    <option value="account_manager">Account Manager</option>
+  </select>
+  <br>
+  <button onclick="generate()">Generate My Cover Letter</button>
+
+  <div id="output">🌀 Your ad-world manifesto will appear here</div>
+
+  <script>
+    function generate() {
+      const name = document.getElementById('name').value || 'An Overcaffeinated Applicant';
+      const company = document.getElementById('company').value || 'Your Glorious Agency';
+      const role = document.getElementById('role').value;
+
+      const templates = {
+        copywriter: `
+Dear ${company},
+
+Words. They’re not just my tools — they’re my battleground.
+
+Whether it’s a three-word headline or a manifesto that makes planners cry, I bring emotion, edge, and just the right amount of alliteration.
+
+I’ve written ads that made people laugh, cry, and occasionally buy things. I believe in big ideas, bigger ambition, and snackable content that slaps.
+
+Hire me, and let’s turn your brand story into an epic worth binge-reading.
+
+Yours in Oxford commas,
+${name}
+        `,
+        strategist: `
+To the fine minds at ${company},
+
+Ever since I first uttered the words “consumer insight,” I knew I was born for this.
+
+I don't just think outside the box — I audit the box, segment its audience, and deliver a deck that turns boxes into business objectives.
+
+If you're looking for someone who can connect cultural trends to campaign KPIs faster than a Gen Z on TikTok, I'm your person.
+
+Let's architect the strategy that Cannes case studies are made of.
+
+Always aligning,
+${name}
+        `,
+        designer: `
+Hey ${company},
+
+Design isn't decoration. It’s storytelling with pixels, gridlines, and just enough white space to breathe.
+
+From brutalist banners to brand guidelines tighter than kerning on a Helvetica R, I build with feeling and finesse.
+
+If your brand needs a visual renaissance, I’m ready to make the magic.
+
+Aesthetic allegiance,
+${name}
+        `,
+        creative_director: `
+Dear ${company},
+
+I don't direct creatives. I conduct symphonies of chaos into campaigns that convert.
+
+I’ve led brainstorms that turned Post-Its into pitch wins, and mentored teams like a Buddhist monk with a Behance portfolio.
+
+Give me your briefs, your budgets, your jaded clients yearning to believe again — and I’ll give you the best work of their fiscal year.
+
+In relentless pursuit of big ideas,
+${name}
+        `,
+        account_manager: `
+Dear ${company},
+
+Client whisperer. Chaos translator. Deadline juggler. That’s my LinkedIn bio. But what I really am? A bridge between ambition and execution.
+
+I’ve turned vague client feedback into actionable gold. I’ve herded creative cats across four time zones. I’ve smiled through 7am status calls.
+
+Let me be the glue that holds your dream team (and your timelines) together.
+
+Forever following up,
+${name}
+        `
+      };
+
+      document.getElementById('output').innerText = templates[role];
+    }
+  </script>
+</body>
+</html>
