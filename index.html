@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Ad Job Fanfiction Generator</title>
+  <title>Cover Letter Lab: Advertising edition</title>
   <style>
     body {
       background-color: #111;
@@ -16,6 +16,9 @@
       font-size: 16px;
       border-radius: 5px;
       border: none;
+      width: 300px;
+      height: 44px;
+      box-sizing: border-box;
     }
     button {
       padding: 12px 25px;
@@ -25,6 +28,7 @@
       border: none;
       border-radius: 8px;
       cursor: pointer;
+      margin: 10px;
     }
     #output {
       margin-top: 30px;
@@ -38,12 +42,13 @@
   </style>
 </head>
 <body>
-  <h1>Ad Industry Cover Letter Generator</h1>
-  <p>Choose your role. Enter your info. Let the cringe begin.</p>
+  <h1>Cover Letter Lab: Advertising edition</h1>
+  <p>100% satire, 0% results. (Please don't actually send these!)</p>
 
-  <input type="text" id="name" placeholder="Your Name">
-  <input type="text" id="company" placeholder="Company + Job Title">
+  <input type="text" id="name" placeholder="Human behind the hustle">
+  <input type="text" id="company" placeholder="Insert corporate overlord here">
   <select id="role">
+    <option value="" disabled selected>Select your industry identity</option>
     <option value="copywriter">Copywriter</option>
     <option value="strategist">Strategist</option>
     <option value="designer">Designer</option>
@@ -56,195 +61,202 @@
     <option value="finance">Finance</option>
   </select>
   <br>
-  <button onclick="generate()">Generate My Cover Letter</button>
-  <button onclick="generate()">🔁 Regenerate Cover Letter</button>
-  <div id="output">🌀 Your ad-world manifesto will appear here</div>
+  <button id="generateBtn" onclick="generate()">Write the damn thing</button>
+  <div id="output"></div>
+  <button id="regenerateBtn" onclick="generate()" style="display: none; margin-top: 20px;">Not cringe enough, refresh 🔄</button>
 
   <script>
-    function generate() {
-      function generate() {
-  const name = document.getElementById('name').value || 'An Overcaffeinated Applicant';
-  const company = document.getElementById('company').value || 'Your Glorious Agency';
-  const role = document.getElementById('role').value;
+    const templates = {
+      copywriter: [
+        `Dear \${company},
 
-  const letterArray = templates[role];
+Words. They're not just my tools — they're my battleground.
 
-  if (!letterArray) {
-    document.getElementById('output').innerText = 'Oops, no fanfiction found for this role yet.';
-    return;
-  }
+Whether it's a three-word headline or a manifesto that makes planners cry, I bring emotion, edge, and just the right amount of alliteration.
 
-  const randomIndex = Math.floor(Math.random() * letterArray.length);
-  const rawTemplate = letterArray[randomIndex];
-
-  const letter = rawTemplate
-    .replace(/\${name}/g, name)
-    .replace(/\${company}/g, company);
-
-  document.getElementById('output').innerText = letter;
-}
-
-
-      const templates = {
-  copywriter: [
-    `Dear ${company},
-
-Words. They’re not just my tools — they’re my battleground.
-
-Whether it’s a three-word headline or a manifesto that makes planners cry, I bring emotion, edge, and just the right amount of alliteration.
-
-Hire me, and let’s turn your brand story into an epic worth binge-reading.
+Hire me, and let's turn your brand story into an epic worth binge-reading.
 
 Yours in Oxford commas,  
-${name}`
-  ],
+\${name}`
+      ],
 
-  strategist: [
-    `To the fine minds at ${company},
+      strategist: [
+        `To the fine minds at \${company},
 
-Ever since I first uttered the words “consumer insight,” I knew I was born for this.
+Ever since I first uttered the words "consumer insight," I knew I was born for this.
 
 If you're looking for someone who can connect cultural trends to campaign KPIs faster than a Gen Z on TikTok, I'm your person.
 
 Let's architect the strategy that Cannes case studies are made of.
 
 Always aligning,  
-${name}`
-  ],
+\${name}`
+      ],
 
-  designer: [
-    `Hey ${company},
+      designer: [
+        `Hey \${company},
 
-Design isn't decoration. It’s storytelling with pixels, gridlines, and just enough white space to breathe.
+Design isn't decoration. It's storytelling with pixels, gridlines, and just enough white space to breathe.
 
 From brutalist banners to brand guidelines tighter than kerning on a Helvetica R, I build with feeling and finesse.
 
 Aesthetic allegiance,  
-${name}`
-  ],
+\${name}`
+      ],
 
-  creative_director: [
-    `Dear ${company},
+      creative_director: [
+        `Dear \${company},
 
 I don't direct creatives. I conduct symphonies of chaos into campaigns that convert.
 
-Give me your briefs, your budgets, your jaded clients yearning to believe again — and I’ll give you the best work of their fiscal year.
+Give me your briefs, your budgets, your jaded clients yearning to believe again — and I'll give you the best work of their fiscal year.
 
 In relentless pursuit of big ideas,  
-${name}`,
+\${name}`,
 
-    `To the team at ${company},
+        `To the team at \${company},
 
 I've turned brainstorms into battles, post-its into poetry, and edits into Emmy bait.
 
-If your agency wants iconic, not just effective — I’m ready to make award season cry.
+If your agency wants iconic, not just effective — I'm ready to make award season cry.
 
 Humbly legendary,  
-${name}`,
+\${name}`,
 
-    `Dear ${company},
+        `Dear \${company},
 
 Every campaign starts with a whisper. I turn that whisper into a roar.
 
 From Cannes to client decks, I speak fluent chaos and vision. Let me help your agency forget what safe ever looked like.
 
 Signed with ambition,  
-${name}`,
+\${name}`,
 
-    `Hello ${company},
+        `Hello \${company},
 
-Vision. Volume. Vibes. That’s what I bring to a pitch, a room, and a Slack thread.
+Vision. Volume. Vibes. That's what I bring to a pitch, a room, and a Slack thread.
 
-I’ve led global teams with three hours of sleep and one killer idea. Let’s create the kind of work the industry worships and interns quote in pitch decks.
+I've led global teams with three hours of sleep and one killer idea. Let's create the kind of work the industry worships and interns quote in pitch decks.
 
 Loudly leading,  
-${name}`,
+\${name}`,
 
-    `Dear ${company},
+        `Dear \${company},
 
-You don’t just need a creative director. You need a dream disruptor with pitch decks that make clients weep (with joy).
+You don't just need a creative director. You need a dream disruptor with pitch decks that make clients weep (with joy).
 
-Let’s take your agency’s name from memorable… to mythological.
+Let's take your agency's name from memorable… to mythological.
 
 Respectfully iconic,  
-${name}`
-  ],
+\${name}`
+      ],
 
-  account_manager: [
-    `Dear ${company},
+      account_manager: [
+        `Dear \${company},
 
-Client whisperer. Chaos translator. Deadline juggler. That’s my LinkedIn bio. But what I really am? A bridge between ambition and execution.
+Client whisperer. Chaos translator. Deadline juggler. That's my LinkedIn bio. But what I really am? A bridge between ambition and execution.
 
-I’ve turned vague client feedback into actionable gold. I’ve herded creative cats across four time zones.
+I've turned vague client feedback into actionable gold. I've herded creative cats across four time zones.
 
 Forever following up,  
-${name}`
-  ],
+\${name}`
+      ],
 
-  social_media: [
-    `Dear ${company},
+      social_media: [
+        `Dear \${company},
 
 I live in the comments section. I breathe in memes, exhale engagement.
 
 From reactive TikToks to carefully timed thirst traps, I craft content that not only converts — it *goes viral*.
 
-Hire me and your brand won’t just be present online — it’ll be the main character.
+Hire me and your brand won't just be present online — it'll be the main character.
 
 #HireMeMaybe  
-${name}`
-  ],
+\${name}`
+      ],
 
-  art_director: [
-    `Dear ${company},
+      art_director: [
+        `Dear \${company},
 
-I don’t just make things look good — I make them iconic.
+I don't just make things look good — I make them iconic.
 
 I've moodboarded my way out of disasters, color-corrected broken dreams, and led teams through the great Helvetica Wars of 2022.
 
-Let’s build the next visual legacy.
+Let's build the next visual legacy.
 
 With style (and substance),  
-${name}`
-  ],
+\${name}`
+      ],
 
-  media_planner: [
-    `Hello ${company},
+      media_planner: [
+        `Hello \${company},
 
 While others see CPMs and GRPs, I see poetry in placement.
 
-I’ve outbid giants, outsmarted algorithms, and delivered ROI with the grace of a budget-savvy ballerina.
+I've outbid giants, outsmarted algorithms, and delivered ROI with the grace of a budget-savvy ballerina.
 
 Optimistically yours,  
-${name}`
-  ],
+\${name}`
+      ],
 
-  hr: [
-    `Dear ${company},
+      hr: [
+        `Dear \${company},
 
-HR isn’t about policies. It’s about people — and I’m in the business of building cults (the healthy kind).
+HR isn't about policies. It's about people — and I'm in the business of building cults (the healthy kind).
 
 From onboarding to offboarding, I make sure employees feel seen, heard, and slightly too comfortable.
 
-Let’s build a workplace they’ll cry about on LinkedIn — in a good way.
+Let's build a workplace they'll cry about on LinkedIn — in a good way.
 
 Warmly,  
-${name}`
-  ],
+\${name}`
+      ],
 
-  finance: [
-    `Dear ${company},
+      finance: [
+        `Dear \${company},
 
 Spreadsheets are my love language.
 
-I’ve balanced budgets tighter than your jeans after year-end bonuses. I bring logic, structure, and just enough sass to make accounting a core brand function.
+I've balanced budgets tighter than your jeans after year-end bonuses. I bring logic, structure, and just enough sass to make accounting a core brand function.
 
 Let me bring balance to your books — and your soul.
 
 Sincerely,  
-${name}`
-  ]
-};
-      document.getElementById('output').innerText = templates[role];
+\${name}`
+      ]
+    };
+
+    function generate() {
+      const name = document.getElementById('name').value || 'An Overcaffeinated Applicant';
+      const company = document.getElementById('company').value || 'Your Glorious Agency';
+      const role = document.getElementById('role').value;
+
+      // Check if a role is selected
+      if (!role) {
+        document.getElementById('output').innerText = 'Please select your industry identity first!';
+        return;
+      }
+
+      const letterArray = templates[role];
+
+      if (!letterArray || letterArray.length === 0) {
+        document.getElementById('output').innerText = 'Oops, no fanfiction found for this role yet.';
+        return;
+      }
+
+      // Force a truly random selection each time
+      const randomIndex = Math.floor(Math.random() * letterArray.length);
+      const rawTemplate = letterArray[randomIndex];
+
+      const letter = rawTemplate
+        .replace(/\$\{name\}/g, name)
+        .replace(/\$\{company\}/g, company);
+
+      document.getElementById('output').innerText = letter;
+      
+      // Hide the generate button and show the regenerate button
+      document.getElementById('generateBtn').style.display = 'none';
+      document.getElementById('regenerateBtn').style.display = 'inline-block';
     }
   </script>
 </body>
