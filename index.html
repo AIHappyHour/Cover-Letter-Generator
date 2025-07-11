@@ -602,10 +602,14 @@ Calculatedly yours,
     };
 
     function generate() {
-      const name = document.getElementById('name').value || 'An Overcaffeinated Applicant';
-      const company = document.getElementById('company').value || 'Your Glorious Agency';
-      const role = document.getElementById('role').value;
+      const nameInput = document.getElementById('name');
+const companyInput = document.getElementById('company');
+const roleInput = document.getElementById('role');
 
+const name = nameInput ? (nameInput.value || 'An Overcaffeinated Applicant') : 'An Overcaffeinated Applicant';
+const company = companyInput ? (companyInput.value || 'Your Glorious Agency') : 'Your Glorious Agency';
+const role = roleInput ? roleInput.value : null;
+      
       // Check if a role is selected
       if (!role) {
         document.getElementById('output').innerText = 'Please select your industry identity first!';
