@@ -39,6 +39,83 @@
       white-space: pre-wrap;
       text-align: left;
     }
+
+    /* Floating Feedback Button */
+    .feedback-button {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background: linear-gradient(135deg, #e63946, #d62828);
+      color: white;
+      border: none;
+      border-radius: 50px;
+      padding: 14px 20px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 6px 20px rgba(230, 57, 70, 0.4);
+      transition: all 0.3s ease;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      z-index: 1000;
+      backdrop-filter: blur(10px);
+    }
+
+    .feedback-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(230, 57, 70, 0.6);
+      background: linear-gradient(135deg, #d62828, #c1121f);
+    }
+
+    .feedback-button:active {
+      transform: translateY(0px);
+    }
+
+    .feedback-button::before {
+      content: '💬';
+      font-size: 16px;
+    }
+
+    /* Pulse animation */
+    @keyframes pulse {
+      0% {
+        box-shadow: 0 6px 20px rgba(230, 57, 70, 0.4);
+      }
+      50% {
+        box-shadow: 0 6px 20px rgba(230, 57, 70, 0.8);
+      }
+      100% {
+        box-shadow: 0 6px 20px rgba(230, 57, 70, 0.4);
+      }
+    }
+
+    .feedback-button.pulse {
+      animation: pulse 2s infinite;
+    }
+
+    /* Mobile responsiveness */
+    @media (max-width: 768px) {
+      body {
+        padding: 20px;
+      }
+      
+      input, select {
+        width: 280px;
+      }
+      
+      .feedback-button {
+        bottom: 20px;
+        right: 20px;
+        padding: 12px 18px;
+        font-size: 13px;
+      }
+      
+      .feedback-button::before {
+        font-size: 14px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -64,6 +141,14 @@
   <button id="generateBtn" onclick="generate()">Write the damn thing</button>
   <div id="output"></div>
   <button id="regenerateBtn" onclick="generate()" style="display: none; margin-top: 20px;">Not cringe enough, refresh 🔄</button>
+
+  <!-- Floating Feedback Button -->
+  <a href="https://forms.gle/VFNeJSgWicnifEro9" 
+     target="_blank" 
+     class="feedback-button"
+     title="Share your feedback">
+    Feedback
+  </a>
 
   <script>
     const templates = {
@@ -603,12 +688,12 @@ Calculatedly yours,
 
     function generate() {
       const nameInput = document.getElementById('name');
-const companyInput = document.getElementById('company');
-const roleInput = document.getElementById('role');
+      const companyInput = document.getElementById('company');
+      const roleInput = document.getElementById('role');
 
-const name = nameInput ? (nameInput.value || 'An Overcaffeinated Applicant') : 'An Overcaffeinated Applicant';
-const company = companyInput ? (companyInput.value || 'Your Glorious Agency') : 'Your Glorious Agency';
-const role = roleInput ? roleInput.value : null;
+      const name = nameInput ? (nameInput.value || 'An Overcaffeinated Applicant') : 'An Overcaffeinated Applicant';
+      const company = companyInput ? (companyInput.value || 'Your Glorious Agency') : 'Your Glorious Agency';
+      const role = roleInput ? roleInput.value : null;
       
       // Check if a role is selected
       if (!role) {
@@ -637,6 +722,22 @@ const role = roleInput ? roleInput.value : null;
       document.getElementById('generateBtn').style.display = 'none';
       document.getElementById('regenerateBtn').style.display = 'inline-block';
     }
+
+    // Feedback button functionality
+    document.addEventListener('DOMContentLoaded', function() {
+      const feedbackButton = document.querySelector('.feedback-button');
+      
+      // Add pulse effect for first 5 seconds
+      feedbackButton.classList.add('pulse');
+      setTimeout(() => {
+        feedbackButton.classList.remove('pulse');
+      }, 5000);
+
+      // Track clicks (optional)
+      feedbackButton.addEventListener('click', function() {
+        console.log('Feedback button clicked from Cover Letter Lab');
+      });
+    });
   </script>
 </body>
 </html>
